@@ -17,7 +17,6 @@ public class QueryHelperTest {
     private static EntityManagerFactory entityManagerFactory;
     private static EntityManagerUtil emUtil;
     private static QueryHelper queryHelper;
-
     @BeforeAll
     public static void setup() {
         entityManagerFactory = Persistence.createEntityManagerFactory("Account");

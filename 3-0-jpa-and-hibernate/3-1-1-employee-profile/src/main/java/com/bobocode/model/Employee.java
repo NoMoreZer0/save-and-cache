@@ -1,8 +1,11 @@
 package com.bobocode.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 /**
  * todo:
@@ -13,11 +16,16 @@ import lombok.Setter;
  *
  * - map unidirectional relation between {@link Employee} and {@link EmployeeProfile} on the child side
  */
+
+@Entity
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@Table(name="employee")
 public class Employee {
+    @Id
+    @GeneratedValue
     private Long id;
+
     private String email;
     private String fistName;
     private String lastName;
