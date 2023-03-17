@@ -17,16 +17,21 @@ import javax.persistence.*;
  * - map unidirectional relation between {@link Employee} and {@link EmployeeProfile} on the child side
  */
 
-@Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@Table(name="employee")
+@Entity
+@Table(name = "employee")
 public class Employee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private Long id;
 
+    @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "fistName", nullable = false)
     private String fistName;
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 }

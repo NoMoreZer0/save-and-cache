@@ -29,7 +29,6 @@ class EmployeeProfileMappingTest {
     static void destroy() {
         entityManagerFactory.close();
     }
-
     @Test
     @Order(1)
     @DisplayName("The employee table has a correct name")

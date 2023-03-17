@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,16 +26,25 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "company")
 public class Company {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "product")
     private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
-        throw new ExerciseNotCompletedException();
+        products.add(product);
     }
 
     public void removeProduct(Product product) {
-        throw new ExerciseNotCompletedException();
+        products.remove(product);
     }
 }
