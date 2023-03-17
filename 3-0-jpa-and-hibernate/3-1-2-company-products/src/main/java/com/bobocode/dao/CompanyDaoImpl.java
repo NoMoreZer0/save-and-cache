@@ -17,7 +17,7 @@ public class CompanyDaoImpl implements CompanyDao {
     @Override
     public Company findByIdFetchProducts(Long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Company company = (Company) entityManager.find(Company.class, id);
+        Company company = entityManager.find(Company.class, id);
         return company;
     }
 }
