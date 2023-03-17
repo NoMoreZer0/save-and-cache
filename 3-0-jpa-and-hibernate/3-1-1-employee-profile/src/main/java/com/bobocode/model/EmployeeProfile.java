@@ -25,7 +25,7 @@ public class EmployeeProfile {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     @MapsId
     private Employee employee;
