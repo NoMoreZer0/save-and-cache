@@ -3,8 +3,11 @@ package com.bobocode.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -21,12 +24,50 @@ import java.util.Set;
  * <p>
  * - configure many-to-many relation as mapped on the {@link Author} side
  */
-@NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "book")
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @NaturalId
+    @Column(name = "isbn", nullable = false, unique = true)
     private String isbn;
+
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
     private Set<Author> authors;
+    public Book() {
+        this.authors = new HashSet<>();
+    }
+
+    private void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
+
+    public void addAuthor(Author author) {
+        authors.add(author);
+    }
+
+    public void removeAuthor(Author author) {
+        authors.remove(author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        return Objects.equals(this.isbn, ((Book) obj).isbn);
+    }
 }
